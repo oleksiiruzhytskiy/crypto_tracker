@@ -5,13 +5,14 @@ import tailwindcss from 'tailwindcss'
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react()],
+  base: '/crypto_tracker/',
   css: {
     postcss: {
       plugins: [tailwindcss()],
     },
   },
   build: {
-    outDir: 'dist', 
-    assetsDir: 'assets', // Ensure this matches your gh-pages deployment folder
+    outDir: 'dist',  // Output directory for the build
+    assetsDir: 'assets',  // Directory for static assets like JS and CSS
   },
 })
