@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Menu } from "antd";
+import { Menu, Spin } from "antd";
 import type { MenuProps } from "antd";
 import axios from "axios";
 import CryptoCurrencyCard from "./components/CryptoCurrencyCard";
@@ -15,6 +15,7 @@ export type Crypto = {
   quote: {
     USD: {
       price: number;
+      percent_change_24h: number;
     };
   };
   symbol: string;
@@ -71,7 +72,7 @@ const App: React.FC = () => {
     <section className="w-full h-full flex items-center">
       {!cryptosData.length ? (
         <div className="w-full h-dvh text-lg flex justify-center items-center">
-          <p>Loading...</p>
+          <Spin size="large"/>
         </div>
       ) : (
         <>
@@ -88,7 +89,7 @@ const App: React.FC = () => {
               }}
             />
           </div>
-          <CryptoCurrencyCard selectedCryptoCurrency={selectedCrypto} />
+          {cryptosData ? <CryptoCurrencyCard selectedCryptoCurrency={selectedCrypto} /> : <Spin size="large"/>}
         </>
       )}
     </section>

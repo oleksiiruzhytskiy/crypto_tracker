@@ -16,7 +16,9 @@ function CryptoCurrencyCard({
     id,
     name,
     symbol,
-    quote: { USD: { price } },
+    quote: {
+      USD: { price, percent_change_24h },
+    },
     cmc_rank,
     circulating_supply,
     max_supply,
@@ -27,7 +29,7 @@ function CryptoCurrencyCard({
   const moreDetailsUrl = `https://coinmarketcap.com/currencies/${name.toLowerCase()}/`;
 
   return (
-    <section className="m-auto w-96 h-72 ">
+    <section className="m-auto w-96 h-90 ">
       <Card
         title={
           <div className="flex items-center">
@@ -47,17 +49,17 @@ function CryptoCurrencyCard({
         <p className="text-xl mt-1">
           Price: {price < 1 ? price.toFixed(5) : price.toFixed(2)} USD
         </p>
-
-        <p className="text-base mt-2">
-          Circulating_supply:{" "}
-          {circulating_supply.toFixed(0)}
+        <p className="text-xl mt-1">
+          Percent_change_24h:{" "}
+          <span className="text-green-400">
+            {percent_change_24h.toFixed(2)}%
+          </span>
         </p>
         <p className="text-base mt-2">
-          Circulating_supply: {max_supply}
+          Circulating_supply: {circulating_supply.toFixed(0)}
         </p>
-        <p className="text-base mt-2">
-          Date added: {date_added.split("T")[0]}
-        </p>
+        <p className="text-base mt-2">Circulating_supply: {max_supply}</p>
+        <p className="text-base mt-2">Date added: {date_added.split("T")[0]}</p>
         <p className="text-base mt-2">
           Last updated: {last_updated.replace("T", " ").replace(".000Z", "")}
         </p>
