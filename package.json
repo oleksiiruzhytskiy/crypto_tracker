@@ -2,7 +2,7 @@
   "name": "crypto_tracker",
   "private": true,
   "version": "0.0.0",
-  "homepage": "https://oleksiiruzhytskiy.github.io/crypto_tracker",
+  "homepage": "https://oleksiiruzhytskiy.github.io/crypto_tracker/",
   "type": "module",
   "scripts": {
     "predeploy": "npm run build",
