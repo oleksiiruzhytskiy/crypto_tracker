@@ -3,6 +3,7 @@ import { Menu, Spin } from "antd";
 import type { MenuProps } from "antd";
 import axios from "axios";
 import CryptoCurrencyCard from "./components/CryptoCurrencyCard";
+import { urlsApi } from "./api/urls";
 
 export type Crypto = {
   id: number;
@@ -16,12 +17,11 @@ export type Crypto = {
     USD: {
       price: number;
       percent_change_24h: number;
+      market_cap: number;
     };
   };
   symbol: string;
-
-  // Add other properties as needed
-}
+};
 
 const App: React.FC = () => {
   const [current, setCurrent] = useState("");
@@ -38,9 +38,7 @@ const App: React.FC = () => {
 
   const fetchCryptoData = async () => {
     try {
-      const response = await axios.get(
-        "http://127.0.0.1:8000/cryptocurrencies"
-      );
+      const response = await axios.get(urlsApi.cryptocurrencies);
       const cryptoList = response.data;
       setCryptosData(cryptoList); // Assuming response.data is an array of crypto names
       setCryptoMenu((prev = []) => [
@@ -72,7 +70,7 @@ const App: React.FC = () => {
     <section className="w-full h-full flex items-center">
       {!cryptosData.length ? (
         <div className="w-full h-dvh text-lg flex justify-center items-center">
-          <Spin size="large"/>
+          <Spin size="large" />
         </div>
       ) : (
         <>
@@ -89,7 +87,11 @@ const App: React.FC = () => {
               }}
             />
           </div>
-          {cryptosData ? <CryptoCurrencyCard selectedCryptoCurrency={selectedCrypto} /> : <Spin size="large"/>}
+          {cryptosData ? (
+            <CryptoCurrencyCard selectedCryptoCurrency={selectedCrypto} />
+          ) : (
+            <Spin size="large" />
+          )}
         </>
       )}
     </section>
